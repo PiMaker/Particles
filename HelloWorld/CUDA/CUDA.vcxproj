@@ -92,6 +92,8 @@ copy "$(OutDir)..\CUDA\Debug\kernel.ptx" "$(ProjectDir)..\HelloWorld\bin\Windows
     </PostBuildEvent>
     <CudaCompile>
       <Keep>true</Keep>
+      <CodeGeneration>compute_30,sm_30</CodeGeneration>
+      <GPUDebugInfo>false</GPUDebugInfo>
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -107,10 +109,14 @@ copy "$(OutDir)..\CUDA\Debug\kernel.ptx" "$(ProjectDir)..\HelloWorld\bin\Windows
     </Link>
     <PostBuildEvent>
       <Command>echo copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"
-copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
+copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"
+
+copy "$(OutDir)..\CUDA\Debug\kernel.ptx" "$(ProjectDir)..\HelloWorld\bin\Windows\x86\Debug\kernel.ptx"
+copy "$(OutDir)..\CUDA\Debug\kernel.ptx" "$(ProjectDir)..\HelloWorld\bin\Windows\x86\Release\kernel.ptx"</Command>
     </PostBuildEvent>
     <CudaCompile>
-      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <TargetMachinePlatform>32</TargetMachinePlatform>
+      <Keep>true</Keep>
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
